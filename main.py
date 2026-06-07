@@ -7,7 +7,6 @@ from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE
 from pydantic import BaseModel, Field
 import io, warnings, os
-
 warnings.filterwarnings('ignore')
 
 
@@ -139,7 +138,6 @@ def create_pptx(deck: PresentationDeck, template_stream=None):
         text_frame = notes_slide.notes_text_frame
         text_frame.text = slide_data.speaker_notes
 
-    # XML hack to safely delete the first template slide
     if template_stream and len(prs.slides) > len(deck.slides):
         try:
             rId = prs.slides._sldIdLst[0].rId
