@@ -185,7 +185,6 @@ def main():
             if not uploaded_pdfs:
                 st.warning("Please upload at least one PDF.")
             else:
-                # Append Native PDF Parts to the Gemini prompt
                 for pdf in uploaded_pdfs:
                     contents_to_send.append(
                         types.Part.from_bytes(
@@ -194,13 +193,12 @@ def main():
                         )
                     )
                 
-                # Add the text directive
                 if pdf_focus:
                     contents_to_send.append(f"Extract the most salient information from these documents to build a presentation, focusing specifically on: {pdf_focus}")
                 else:
                     contents_to_send.append("Extract the most important, salient information from these documents to build a comprehensive presentation.")
                 
-                tools_to_use = None # No search needed, rely on docs
+                tools_to_use = None 
                 filename_prefix = "Document_Synthesis"
                 ready_to_generate = True
     
@@ -209,7 +207,7 @@ def main():
             st.write("🧠 Analyzing inputs and designing slide structure...")
             
             try:
-                # Build Config dynamically based on mode
+
                 config_params = {
                     "system_instruction": SYSTEM_PROMPT,
                     "response_mime_type": "application/json",
@@ -222,7 +220,6 @@ def main():
     
                 config = types.GenerateContentConfig(**config_params)
     
-                # API Call
                 response = client.models.generate_content(
                     model=MODEL_ID,
                     contents=contents_to_send,
