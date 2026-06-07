@@ -262,7 +262,7 @@ if __name__ == '__main__':
     try:
         GEMINI_API_KEY = os.environ.get("GOOGLE_API_KEY")
         client = genai.Client(api_key=GEMINI_API_KEY)
-        MODEL_ID = "gemini-3-flash-preview"
+        MODEL_ID = "gemini-3.1-pro-preview"
     except Exception:
         st.error("🚨 GOOGLE_API_KEY not found in environment variables.")
         st.stop()
